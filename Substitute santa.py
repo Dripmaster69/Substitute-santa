@@ -1,31 +1,33 @@
-childname = input("Vad heter barnet?:  ")
-filename = input("Vad vill du att önske listan ska heta?:  ")
-
 def meny():
-    for x in range(1):
-        print("""
-        1. Lägg till önskelista
-        2. Läs upp önskelista
-        """)
-        a = int(input("Välj ett alternativ:  "))
+    print("""
+    1. Lägg till önskelista
+    2. Läs upp önskelista
+    """)
+    a = int(input("Välj ett alternativ:  "))
     return a
 
 def skapa_öl():
-    with open (f"{filename}.txt", "w", encoding="utf8") as öl:
-        öl.write(f"{childname}s önskelista")
-        n = 2
-        while True:
-            a = input("vad vill du lägga till på önske listan (skriv # om du är klar):  ")
+    childname = input("Vad heter barnet?:  ")
+    filename = input("Vad vill du att önske listan ska heta?:  ")
+    with open (filename, "w", encoding="utf8") as öl:
+        öl.write(childname+str("s önskelista\n"))
+        n = 1
+        b = 2
+        while b > 1:
+            a = str(input("vad vill du lägga till på önskelistan (skriv # om du är klar):  "))
             if a == "#":
-                True == False
-            öl.write(f"{n}. {a}")
-            n += 1
+                b = -1
+                main()
+            else:
+                öl.write(f"{n}. {a}\n")
+                n += 1
 
 def läsup_öl():
-    a = input("Vad heter önskelistan?:  ")
-    with open (f"{a}.txt", "r", encoding="utf8") as öl:
-        for lines in öl.readlines():
-            print(f"{lines}")
+    filename = input("Vad heter önskelistan?:  ")
+    with open(filename+str(".txt"), "r", encoding="utf8") as öl:
+        lines = öl.readlines()
+        for line in lines:
+            print(line, end="")
 
 def main():
     k = meny()
